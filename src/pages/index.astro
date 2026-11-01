@@ -1,7 +1,37 @@
+
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="〇〇のホームページ">
-	<h1>こんにちは、さどぱです</h1>
-	<p>〇〇〇〇大学の学生です。ここは私のホームページです。</p>
+
+<Layout title="さどぱのデカいつぶやき">
+	<section class="main-visual">
+		<img
+			src="/images/main-visual.jpg"
+			alt="さどぱのデカいつぶやき"
+		/>
+	</section>
 </Layout>
+
+<style>
+	.main-visual {
+		min-height: 65vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 3rem 0;
+	}
+
+	.main-visual img {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: contain;
+	}
+
+	@media (max-width: 700px) {
+		.main-visual {
+			min-height: auto;
+			padding: 2rem 0;
+		}
+	}
+</style>
