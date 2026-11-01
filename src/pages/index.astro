@@ -1,6 +1,15 @@
 
 ---
 import Layout from '../layouts/Layout.astro';
+
+const articles = [
+	{ genre: '短編', title: 'ここに短編のタイトル', number: '01' },
+	{ genre: 'ミステリー', title: 'ここにミステリーのタイトル', number: '02' },
+	{ genre: '記事', title: 'ここに記事のタイトル', number: '03' },
+	{ genre: '短編', title: 'ここに短編のタイトル', number: '04' },
+	{ genre: 'ミステリー', title: 'ここにミステリーのタイトル', number: '05' },
+	{ genre: '記事', title: 'ここに記事のタイトル', number: '06' },
+];
 ---
 
 <Layout title="さどぱのデカいつぶやき">
@@ -9,6 +18,28 @@ import Layout from '../layouts/Layout.astro';
 			src="/images/main-visual.jpg"
 			alt="さどぱのデカいつぶやき"
 		/>
+	</section>
+
+	<section class="contents">
+		<div class="section-heading">
+			<div>
+				<p class="section-label">CONTENTS</p>
+				<h2>コンテンツ一覧</h2>
+			</div>
+			<a href="/contents" class="more-link">もっと見る →</a>
+		</div>
+
+		<div class="article-list">
+			{articles.map((article) => (
+				<a href="/contents" class="article-card">
+					<div class="thumbnail">
+						<span>{article.number}</span>
+					</div>
+					<p class="genre">{article.genre}</p>
+					<h3>{article.title}</h3>
+				</a>
+			))}
+		</div>
 	</section>
 </Layout>
 
@@ -28,10 +59,99 @@ import Layout from '../layouts/Layout.astro';
 		object-fit: contain;
 	}
 
+	.contents {
+		padding: 3rem 0 5rem;
+	}
+
+	.section-heading {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		margin-bottom: 2rem;
+		border-bottom: 1px solid #303b38;
+		padding-bottom: 1rem;
+	}
+
+	.section-label {
+		margin: 0;
+		color: #65c9b5;
+		font-size: 0.8rem;
+		letter-spacing: 0.15em;
+	}
+
+	.section-heading h2 {
+    margin: 0.2rem 0 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+　　}
+
+	.more-link {
+		color: #65c9b5;
+		font-size: 0.8rem;
+		text-decoration: none;
+		letter-spacing: 0.08em;
+	}
+
+	.article-list {
+		display: flex;
+		gap: 1.5rem;
+		overflow-x: auto;
+		padding-bottom: 1rem;
+		scrollbar-color: #65c9b5 #1b2421;
+	}
+
+	.article-card {
+		flex: 0 0 240px;
+		color: #f4f4f4;
+		text-decoration: none;
+	}
+
+	.thumbnail {
+		aspect-ratio: 16 / 10;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #1b2421;
+		border: 1px solid #303b38;
+		color: #65c9b5;
+		font-family: "Zen Kaku Gothic New", sans-serif;
+		font-size: 2rem;
+		transition: background-color 0.2s;
+	}
+
+	.article-card:hover .thumbnail {
+		background: #263630;
+	}
+
+	.genre {
+		margin: 0.8rem 0 0.2rem;
+		color: #65c9b5;
+		font-size: 0.75rem;
+		letter-spacing: 0.08em;
+	}
+
+	.article-card h3 {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 500;
+	}
+
 	@media (max-width: 700px) {
 		.main-visual {
 			min-height: auto;
 			padding: 2rem 0;
+		}
+
+		.contents {
+			padding: 2rem 0 3rem;
+		}
+
+		.section-heading h2 {
+			font-size: 1.4rem;
+		}
+
+		.article-card {
+			flex-basis: 200px;
 		}
 	}
 </style>
