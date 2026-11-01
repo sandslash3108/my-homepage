@@ -10,6 +10,11 @@ const articles = [
 	{ genre: 'ミステリー', title: 'ここにミステリーのタイトル', number: '05', date: '2026.10.10' },
 	{ genre: '記事', title: 'ここに記事のタイトル', number: '06', date: '2026.10.05' },
 ];
+const selectedGenre = Astro.url.searchParams.get('genre') ?? 'ALL';
+
+const filteredArticles = selectedGenre === 'ALL'
+	? articles
+	: articles.filter((article) => article.genre === selectedGenre);
 ---
 
 <Layout title="CONTENTS | さどぱのデカいつぶやき">
@@ -27,7 +32,7 @@ const articles = [
 	</nav>
 
 	<section class="article-grid">
-		{articles.map((article) => (
+		{filteredArticles.map((article) => (
 			<a href="/contents/sample" class="article-card">
 				<div class="thumbnail">
 					<span>{article.number}</span>
