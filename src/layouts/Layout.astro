@@ -77,7 +77,27 @@ const { title } = Astro.props;
 		<p class="copyright">© SADOPA</p>
 	</div>
 </footer>
+<button class="back-to-top" aria-label="ページ上部に戻る" id="backToTop">
+	↑
+</button>
+<script>
+	const backToTop = document.getElementById('backToTop');
 
+	window.addEventListener('scroll', () => {
+		if (window.scrollY > 300) {
+			backToTop?.classList.add('visible');
+		} else {
+			backToTop?.classList.remove('visible');
+		}
+	});
+
+	backToTop?.addEventListener('click', () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
+	});
+</script>
 	</body>
 </html>
 
@@ -290,5 +310,31 @@ const { title } = Astro.props;
 			gap: 1.5rem;
 		}
 	}
+.back-to-top {
+	position: fixed;
+	right: 1.5rem;
+	bottom: 1.5rem;
+	width: 2.8rem;
+	height: 2.8rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #65c9b5;
+	color: #101413;
+	font-size: 1.3rem;
+	text-decoration: none;
+	z-index: 100;
+	opacity: 0;
+visibility: hidden;
+transition: opacity 0.2s, visibility 0.2s;
+	transition: opacity 0.2s;
+}
 
+.back-to-top:hover {
+	opacity: 1;
+}
+.back-to-top.visible {
+	opacity: 0.8;
+	visibility: visible;
+}
 </style>

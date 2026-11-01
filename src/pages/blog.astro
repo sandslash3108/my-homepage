@@ -21,7 +21,7 @@ const posts = [
 
 	<section class="post-grid">
 		{posts.map((post) => (
-			<a href="/blog" class="post-card">
+			<a href="/blog/sample" class="post-card">
 				<div class="thumbnail">
 					<span>{post.number}</span>
 				</div>
@@ -30,6 +30,13 @@ const posts = [
 			</a>
 		))}
 	</section>
+    <nav class="pagination" aria-label="ページ送り">
+	<a href="#" class="current">1</a>
+	<a href="#">2</a>
+	<a href="#">3</a>
+	<span>...</span>
+	<a href="#">次へ →</a>
+</nav>
 </Layout>
 
 <style>
@@ -114,4 +121,36 @@ const posts = [
 			padding-top: 1.5rem;
 		}
 	}
+    .pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.7rem;
+	margin-top: 3rem;
+}
+
+.pagination a,
+.pagination span {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 2.5rem;
+	height: 2.5rem;
+	padding: 0 0.7rem;
+	border: 1px solid #303b38;
+	color: #f4f4f4;
+	text-decoration: none;
+	font-size: 0.85rem;
+}
+
+.pagination a:hover,
+.pagination a.current {
+	background: #65c9b5;
+	border-color: #65c9b5;
+	color: #101413;
+}
+
+.pagination span {
+	border: none;
+}
 </style>
