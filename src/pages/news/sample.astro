@@ -1,0 +1,403 @@
+
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="サイトを公開しました | さどぱのデカいつぶやき">
+	<div class="article-page">
+	<article class="article">
+		<nav class="breadcrumb" aria-label="パンくずリスト">
+	      <a href="/">HOME</a>
+	       <span>›</span>
+	         <a href="/news">NEWS</a>
+	       <span>›</span>
+	       <span class="current">お知らせタイトル</span>
+        </nav>
+
+		<header class="article-header">
+			<a href="/news" class="back-link">← お知らせ一覧に戻る</a>
+
+			<div class="thumbnail">
+				<span>01</span>
+			</div>
+
+			<p class="genre">お知らせ</p>
+			<time datetime="2026-11-02">2026.11.02</time>
+			<h1>サイトを公開しました</h1>
+            <p class="article-description">
+	        さどぱのデカいつぶやきを公開しました。これからよろしくお願いします。
+            </p>
+		</header>
+
+		<div class="article-body">
+			<p>
+				ここから記事本文が始まります。
+				文章を段落ごとに分けて書いていきます。
+			</p>
+
+			<h2>見出しが入ります</h2>
+			<p>
+				記事の本文です。文章が長くなっても読みやすいように、
+				行間や文字の幅を調整しています。
+			</p>
+
+			<p>
+				段落を追加したいときは、このように
+				新しいpタグを追加すればOKです。
+			</p>
+
+			<h2>次の見出し</h2>
+			<p>
+				ここに続きの文章が入ります。
+			</p>
+
+            <p>
+	            普通の文章の中に、
+	            <strong>太字にしたい部分</strong>を入れられるよ。
+            </p>
+
+            <p>
+	            <span class="accent-text">ここは翡翠色で表示される文章。</span>
+            </p>
+
+<blockquote>
+	ここに印象的なセリフや、引用したい文章を入れる。
+</blockquote>
+        <figure class="article-image">
+	<img src="/images/sample-image.jpg" alt="画像の説明" />
+	<figcaption>画像の説明や補足をここに書く。</figcaption>
+</figure>
+		</div>
+
+		<footer class="article-footer">
+			<a href="/news" class="back-link">← お知らせ一覧に戻る</a>
+		</footer>
+			
+		<div class="share">
+			<p class="share-title">この記事をシェアする</p>
+			<div class="share-links">
+				<a
+					href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent('記事タイトル')}`}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="share-button"
+				>
+					𝕏 でシェア
+				</a>
+				<a
+					href={`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(Astro.url.href)}`}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="share-button"
+				>
+					LINEでシェア
+				</a>
+			</div>
+		</div>
+
+		</article>
+	</div>
+
+	<section class="related">
+		<div class="related-heading">
+			<p>RELATED NEWS</p>
+			<h2>関連するお知らせ</h2>
+		</div>
+
+		<div class="related-list">
+	<a href="/news/sample" class="related-card">
+		<div class="related-thumbnail">02</div>
+		<p>NEWS</p>
+		<h3>次のお知らせのタイトル</h3>
+	</a>
+
+	<a href="/news/sample" class="related-card">
+		<div class="related-thumbnail">03</div>
+		<p>NEWS</p>
+		<h3>別のお知らせのタイトル</h3>
+	</a>
+</div>
+	</section>
+</Layout>
+
+
+<style>
+	.article {
+	width: 100%;
+	max-width: 850px;
+	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 2.5rem 2rem 5rem;
+}
+
+	.back-link {
+	display: inline-block;
+	margin-bottom: 1.5rem;
+	color: #168875;
+	font-size: 0.85rem;
+	text-decoration: none;
+}
+
+	.back-link:hover {
+		text-decoration: underline;
+	}
+
+	.thumbnail {
+		aspect-ratio: 16 / 9;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #f0f3f2;
+		border: 1px solid #dce3e0;
+		color: #65c9b5;
+		font-size: 3rem;
+		font-weight: 700;
+	}
+
+	.genre {
+		display: inline-block;
+		margin: 1.5rem 1rem 0 0;
+		color: #168875;
+		font-size: 0.8rem;
+	}
+
+	.article-header time {
+		color: #687570;
+		font-size: 0.8rem;
+	}
+
+	.article-header h1 {
+		margin: 0.8rem 0;
+        color: #101413
+		font-size: 2rem;
+		font-weight: 700;
+		line-height: 1.5;
+	}
+
+	.article-description {
+		color: #687570;
+		font-size: 0.95rem;
+		line-height: 1.8;
+	}
+
+	.article-body {
+		margin-top: 3rem;
+		color: #303b38;
+		font-size: 1rem;
+		line-height: 2.2;
+	}
+
+	.article-body h2 {
+		margin: 3rem 0 1rem;
+		padding-bottom: 0.7rem;
+		border-bottom: 1px solid #dce3e0;
+		color: #101413;
+		font-size: 1.4rem;
+		font-weight: 700;
+		line-height: 1.5;
+	}
+
+	.article-body p {
+		margin: 1.5rem 0;
+	}
+
+	.article-footer {
+		margin-top: 4rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid #dce3e0;
+	}
+
+	.article-footer .back-link {
+		margin: 0;
+	}
+
+	@media (max-width: 700px) {
+	.article {
+		padding: 1.5rem 1.2rem 3rem;
+	}
+
+	.article-header h1 {
+		font-size: 1.5rem;
+	}
+
+	.article-body {
+		font-size: 0.9rem;
+	}
+
+	.article-body h2 {
+		font-size: 1.2rem;
+	}
+}
+    .article-page {
+	background: #ffffff;
+	color: #101413;
+	width: 100vw;
+	margin-left: calc(50% - 50vw);
+}
+    .article-body strong {
+	color: #101413;
+	font-weight: 700;
+}
+
+.article-body .accent-text {
+	color: #168875;
+	font-weight: 700;
+}
+
+.article-body blockquote {
+	margin: 2rem 0;
+	padding: 1rem 1.5rem;
+	border-left: 4px solid #168875;
+	background: #f0f3f2;
+	color: #303b38;
+	font-size: 0.95rem;
+}
+.article-image {
+	margin: 2.5rem 0;
+}
+
+.article-image img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.article-image figcaption {
+	margin-top: 0.6rem;
+	color: #687570;
+	font-size: 0.8rem;
+}
+
+.related {
+	padding: 3rem max(2rem, calc((100% - 1000px) / 2)) 5rem;
+	background: #101413;
+	color: #f4f4f4;
+}
+
+.related-heading {
+	margin-bottom: 2rem;
+	border-bottom: 1px solid #303b38;
+	padding-bottom: 1rem;
+}
+
+.related-heading p {
+	margin: 0;
+	color: #65c9b5;
+	font-size: 0.75rem;
+	letter-spacing: 0.15em;
+}
+
+.related-heading h2 {
+	margin: 0.3rem 0 0;
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+.related-list {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1.5rem;
+}
+
+.related-card {
+	color: #f4f4f4;
+	text-decoration: none;
+}
+
+.related-thumbnail {
+	aspect-ratio: 16 / 10;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #1b2421;
+	border: 1px solid #303b38;
+	color: #65c9b5;
+	font-size: 2rem;
+	font-weight: 700;
+	transition: background-color 0.2s;
+}
+
+.related-card:hover .related-thumbnail {
+	background: #263630;
+}
+
+.related-card p {
+	margin: 0.8rem 0 0.2rem;
+	color: #65c9b5;
+	font-size: 0.75rem;
+}
+
+.related-card h3 {
+	margin: 0;
+	font-size: 0.95rem;
+	font-weight: 500;
+}
+
+@media (max-width: 700px) {
+	.related {
+		padding: 2rem 1.2rem 3rem;
+	}
+
+	.related-list {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+}
+
+.share {
+	margin-top: 2rem;
+	padding: 1.5rem 0;
+	border-top: 1px solid #dce3e0;
+}
+
+.share-title {
+	margin: 0 0 1rem;
+	color: #687570;
+	font-size: 0.85rem;
+}
+
+.share-links {
+	display: flex;
+	gap: 0.8rem;
+	flex-wrap: wrap;
+}
+
+.share-button {
+	display: inline-block;
+	padding: 0.7rem 1.2rem;
+	border: 1px solid #cbd5d1;
+	color: #303b38;
+	font-size: 0.85rem;
+	text-decoration: none;
+	transition: background-color 0.2s, color 0.2s;
+}
+
+.share-button:hover {
+	background: #101413;
+	color: #f4f4f4;
+}
+
+.breadcrumb {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.7rem;
+	margin-bottom: 2rem;
+	color: #84908b;
+	font-size: 0.75rem;
+}
+
+.breadcrumb a {
+	color: #168875;
+	text-decoration: none;
+}
+
+.breadcrumb a:hover {
+	text-decoration: underline;
+}
+
+.breadcrumb .current {
+	color: #687570;
+}
+
+</style>
