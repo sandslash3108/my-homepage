@@ -55,16 +55,29 @@ const { title } = Astro.props;
 			<slot />
 		</main>
 
-		<footer>
-			<div class="footer-inner">
+		
+<footer>
+	<div class="footer-inner">
+		<div class="footer-top">
+			<div>
 				<div class="footer-logo">
 					<span>デカ</span>
 					<span>つぶ</span>
 				</div>
 				<p>SADOPA'S BIG TWEETS</p>
-				<p class="copyright">© SADOPA</p>
 			</div>
-		</footer>
+
+			<nav class="footer-nav">
+				<a href="https://x.com/" target="_blank" rel="noopener noreferrer">X</a>
+				<a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a>
+				<a href="https://note.com/" target="_blank" rel="noopener noreferrer">note</a>
+			</nav>
+		</div>
+
+		<p class="copyright">© SADOPA</p>
+	</div>
+</footer>
+
 	</body>
 </html>
 
@@ -246,4 +259,36 @@ const { title } = Astro.props;
       font-family: "Dela Gothic One", sans-serif;
 	  -webkit-text-stroke: 0.05px #101413;
     }
+	
+	.footer-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 2rem;
+	}
+
+	.footer-nav {
+		display: flex;
+		gap: 1.5rem;
+	}
+
+	.footer-nav a {
+		color: #f4f4f4;
+		font-size: 0.85rem;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	.footer-nav a:hover {
+		color: #65c9b5;
+	}
+
+	@media (max-width: 700px) {
+		.footer-top {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 1.5rem;
+		}
+	}
+
 </style>
