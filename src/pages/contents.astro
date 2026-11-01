@@ -10,11 +10,7 @@ const articles = [
 	{ genre: 'ミステリー', title: 'ここにミステリーのタイトル', number: '05', date: '2026.10.10' },
 	{ genre: '記事', title: 'ここに記事のタイトル', number: '06', date: '2026.10.05' },
 ];
-const selectedGenre = Astro.url.searchParams.get('genre') ?? 'ALL';
 
-const filteredArticles = selectedGenre === 'ALL'
-	? articles
-	: articles.filter((article) => article.genre === selectedGenre);
 ---
 
 <Layout title="CONTENTS | さどぱのデカいつぶやき">
@@ -25,24 +21,24 @@ const filteredArticles = selectedGenre === 'ALL'
 	</section>
 
 	<nav class="category-nav">
-		<a href="/contents" class="active">ALL</a>
-		<a href="/contents?genre=短編">短編</a>
-		<a href="/contents?genre=ミステリー">ミステリー</a>
-		<a href="/contents?genre=記事">記事</a>
-	</nav>
+	<a href="/contents" data-genre="ALL" class="active">ALL</a>
+	<a href="/contents?genre=短編" data-genre="短編">短編</a>
+	<a href="/contents?genre=ミステリー" data-genre="ミステリー">ミステリー</a>
+	<a href="/contents?genre=記事" data-genre="記事">記事</a>
+    </nav>
 
 	<section class="article-grid">
-		{filteredArticles.map((article) => (
-			<a href="/contents/sample" class="article-card">
-				<div class="thumbnail">
-					<span>{article.number}</span>
-				</div>
-				<p class="genre">{article.genre}</p>
-				<h2>{article.title}</h2>
-				<time>{article.date}</time>
-			</a>
-		))}
-	</section>
+	{articles.map((article) => (
+		<a href="/contents/sample" class="article-card" data-genre={article.genre}>
+			<div class="thumbnail">
+				<span>{article.number}</span>
+			</div>
+			<p class="genre">{article.genre}</p>
+			<h2>{article.title}</h2>
+			<time>{article.date}</time>
+		</a>
+	))}
+</section>
     <nav class="pagination" aria-label="ページ送り">
 	<a href="#" class="current">1</a>
 	<a href="#">2</a>
@@ -202,3 +198,50 @@ const filteredArticles = selectedGenre === 'ALL'
 	border: none;
 }
 </style>
+<script>
+	const categoryLinks = document.querySelectorAll('.category-nav a');
+	const articleCards = document.querySelectorAll('.article-card');
+
+	function filterArticles(genre: string) {
+		articleCards.forEach((card) => {
+			const cardGenre = card.getAttribute('data-genre');
+
+			if (genre === 'ALL' || cardGenre === genre) {
+				(card as HTMLElement).style.display = '';
+			} else {
+				(card as HTMLElement).style.display = 'none';
+			}
+		});
+
+		categoryLinks.forEach((link) => {
+			link.classList.toggle(
+				'active',
+				link.getAttribute('data-genre') === genre
+			);
+		});
+	}
+
+	categoryLinks.forEach((link) => {
+		link.addEventListener('click', (event) => {
+			event.preventDefault();
+
+			const genre = link.getAttribute('data-genre') ?? 'ALL';
+
+			filterArticles(genre);
+
+			const url = genre === 'ALL'
+				? '/contents'
+				: `/contents?genre=${encodeURIComponent(genre)}`;
+
+			history.pushState({}, '', url);
+		});
+	});
+
+	const initialGenre = new URLSearchParams(window.location.search).get('genre') ?? 'ALL';
+	filterArticles(initialGenre);
+
+	window.addEventListener('popstate', () => {
+		const genre = new URLSearchParams(window.location.search).get('genre') ?? 'ALL';
+		filterArticles(genre);
+	});
+</script>
