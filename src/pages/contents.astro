@@ -1,0 +1,160 @@
+
+---
+import Layout from '../layouts/Layout.astro';
+
+const articles = [
+	{ genre: '短編', title: 'ここに短編のタイトル', number: '01', date: '2026.11.01' },
+	{ genre: 'ミステリー', title: 'ここにミステリーのタイトル', number: '02', date: '2026.10.25' },
+	{ genre: '記事', title: 'ここに記事のタイトル', number: '03', date: '2026.10.20' },
+	{ genre: '短編', title: 'ここに短編のタイトル', number: '04', date: '2026.10.15' },
+	{ genre: 'ミステリー', title: 'ここにミステリーのタイトル', number: '05', date: '2026.10.10' },
+	{ genre: '記事', title: 'ここに記事のタイトル', number: '06', date: '2026.10.05' },
+];
+---
+
+<Layout title="CONTENTS | さどぱのデカいつぶやき">
+	<section class="page-heading">
+		<p class="section-label">CONTENTS</p>
+		<h1>コンテンツ一覧</h1>
+		<p class="description">短編・ミステリー・記事</p>
+	</section>
+
+	<nav class="category-nav">
+		<a href="/contents" class="active">ALL</a>
+		<a href="/contents?genre=短編">短編</a>
+		<a href="/contents?genre=ミステリー">ミステリー</a>
+		<a href="/contents?genre=記事">記事</a>
+	</nav>
+
+	<section class="article-grid">
+		{articles.map((article) => (
+			<a href="/contents/sample" class="article-card">
+				<div class="thumbnail">
+					<span>{article.number}</span>
+				</div>
+				<p class="genre">{article.genre}</p>
+				<h2>{article.title}</h2>
+				<time>{article.date}</time>
+			</a>
+		))}
+	</section>
+</Layout>
+
+<style>
+	.page-heading {
+		padding: 4rem 0 2.5rem;
+		border-bottom: 1px solid #303b38;
+	}
+
+	.section-label {
+		margin: 0;
+		color: #65c9b5;
+		font-size: 0.8rem;
+		letter-spacing: 0.15em;
+	}
+
+	.page-heading h1 {
+		margin: 0.4rem 0;
+		font-size: 2.2rem;
+		font-weight: 700;
+	}
+
+	.description {
+		margin: 0;
+		color: #a5afab;
+		font-size: 0.9rem;
+	}
+
+	.category-nav {
+		display: flex;
+		gap: 2rem;
+		padding: 1.5rem 0;
+		border-bottom: 1px solid #303b38;
+	}
+
+	.category-nav a {
+		color: #a5afab;
+		font-size: 0.9rem;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	.category-nav a:hover,
+	.category-nav a.active {
+		color: #65c9b5;
+	}
+
+	.article-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 3rem 1.5rem;
+		padding: 2.5rem 0 5rem;
+	}
+
+	.article-card {
+		color: #f4f4f4;
+		text-decoration: none;
+	}
+
+	.thumbnail {
+		aspect-ratio: 16 / 10;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #1b2421;
+		border: 1px solid #303b38;
+		color: #65c9b5;
+		font-size: 2rem;
+		font-weight: 700;
+		transition: background-color 0.2s;
+	}
+
+	.article-card:hover .thumbnail {
+		background: #263630;
+	}
+
+	.genre {
+		margin: 0.8rem 0 0.2rem;
+		color: #65c9b5;
+		font-size: 0.75rem;
+		letter-spacing: 0.08em;
+	}
+
+	.article-card h2 {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 500;
+	}
+
+	.article-card time {
+		display: block;
+		margin-top: 0.6rem;
+		color: #84908b;
+		font-size: 0.75rem;
+	}
+
+	@media (max-width: 700px) {
+		.page-heading {
+			padding: 2.5rem 0 1.5rem;
+		}
+
+		.page-heading h1 {
+			font-size: 1.7rem;
+		}
+
+		.category-nav {
+			gap: 1.2rem;
+			overflow-x: auto;
+		}
+
+		.category-nav a {
+			white-space: nowrap;
+		}
+
+		.article-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+			padding-top: 1.5rem;
+		}
+	}
+</style>

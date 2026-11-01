@@ -1,0 +1,117 @@
+
+---
+import Layout from '../layouts/Layout.astro';
+
+const posts = [
+	{ title: 'ここにブログのタイトル', number: '01', date: '2026.11.01' },
+	{ title: 'ここにブログのタイトル', number: '02', date: '2026.10.25' },
+	{ title: 'ここにブログのタイトル', number: '03', date: '2026.10.20' },
+	{ title: 'ここにブログのタイトル', number: '04', date: '2026.10.15' },
+	{ title: 'ここにブログのタイトル', number: '05', date: '2026.10.10' },
+	{ title: 'ここにブログのタイトル', number: '06', date: '2026.10.05' },
+];
+---
+
+<Layout title="BLOG | さどぱのデカいつぶやき">
+	<section class="page-heading">
+		<p class="section-label">BLOG</p>
+		<h1>ブログ</h1>
+		<p class="description">日々の記録や、どこかへ出かけた話。</p>
+	</section>
+
+	<section class="post-grid">
+		{posts.map((post) => (
+			<a href="/blog" class="post-card">
+				<div class="thumbnail">
+					<span>{post.number}</span>
+				</div>
+				<h2>{post.title}</h2>
+				<time>{post.date}</time>
+			</a>
+		))}
+	</section>
+</Layout>
+
+<style>
+	.page-heading {
+		padding: 4rem 0 2.5rem;
+		border-bottom: 1px solid #303b38;
+	}
+
+	.section-label {
+		margin: 0;
+		color: #65c9b5;
+		font-size: 0.8rem;
+		letter-spacing: 0.15em;
+	}
+
+	.page-heading h1 {
+		margin: 0.4rem 0;
+		font-size: 2.2rem;
+		font-weight: 700;
+	}
+
+	.description {
+		margin: 0;
+		color: #a5afab;
+		font-size: 0.9rem;
+	}
+
+	.post-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 3rem 1.5rem;
+		padding: 2.5rem 0 5rem;
+	}
+
+	.post-card {
+		color: #f4f4f4;
+		text-decoration: none;
+	}
+
+	.thumbnail {
+		aspect-ratio: 16 / 10;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #1b2421;
+		border: 1px solid #303b38;
+		color: #65c9b5;
+		font-size: 2rem;
+		font-weight: 700;
+		transition: background-color 0.2s;
+	}
+
+	.post-card:hover .thumbnail {
+		background: #263630;
+	}
+
+	.post-card h2 {
+		margin: 0.8rem 0 0;
+		font-size: 1rem;
+		font-weight: 500;
+	}
+
+	.post-card time {
+		display: block;
+		margin-top: 0.6rem;
+		color: #84908b;
+		font-size: 0.75rem;
+	}
+
+	@media (max-width: 700px) {
+		.page-heading {
+			padding: 2.5rem 0 1.5rem;
+		}
+
+		.page-heading h1 {
+			font-size: 1.7rem;
+		}
+
+		.post-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+			padding-top: 1.5rem;
+		}
+	}
+</style>

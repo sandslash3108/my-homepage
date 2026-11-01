@@ -1,0 +1,152 @@
+
+---
+import Layout from '../layouts/Layout.astro';
+
+const links = [
+	{
+		name: 'サイト名 01',
+		description: 'サイトの紹介文が入ります。',
+		url: 'https://example.com',
+	},
+	{
+		name: 'サイト名 02',
+		description: 'サイトの紹介文が入ります。',
+		url: 'https://example.com',
+	},
+	{
+		name: 'サイト名 03',
+		description: 'サイトの紹介文が入ります。',
+		url: 'https://example.com',
+	},
+];
+---
+
+<Layout title="LINKS | さどぱのデカいつぶやき">
+	<section class="page-heading">
+		<p class="section-label">LINKS</p>
+		<h1>リンク集</h1>
+		<p class="description">知り合いのサイトや、おすすめのWebサイト。</p>
+	</section>
+
+	<section class="link-list">
+		{links.map((link, index) => (
+			<a
+				href={link.url}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="link-item"
+			>
+				<div class="link-icon">{String(index + 1).padStart(2, '0')}</div>
+				<div class="link-info">
+					<h2>{link.name}</h2>
+					<p>{link.description}</p>
+				</div>
+				<span class="arrow">↗</span>
+			</a>
+		))}
+	</section>
+</Layout>
+
+<style>
+	.page-heading {
+		padding: 4rem 0 2.5rem;
+		border-bottom: 1px solid #303b38;
+	}
+
+	.section-label {
+		margin: 0;
+		color: #65c9b5;
+		font-size: 0.8rem;
+		letter-spacing: 0.15em;
+	}
+
+	.page-heading h1 {
+		margin: 0.4rem 0;
+		font-size: 2.2rem;
+		font-weight: 700;
+	}
+
+	.description {
+		margin: 0;
+		color: #a5afab;
+		font-size: 0.9rem;
+	}
+
+	.link-list {
+		padding: 1rem 0 5rem;
+	}
+
+	.link-item {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+		padding: 1.5rem 0;
+		border-bottom: 1px solid #303b38;
+		color: #f4f4f4;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	.link-item:hover {
+		color: #65c9b5;
+	}
+
+	.link-icon {
+		width: 55px;
+		height: 55px;
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #1b2421;
+		border: 1px solid #303b38;
+		color: #65c9b5;
+		font-size: 1rem;
+		font-weight: 700;
+	}
+
+	.link-info {
+		flex: 1;
+	}
+
+	.link-info h2 {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 500;
+	}
+
+	.link-info p {
+		margin: 0.4rem 0 0;
+		color: #a5afab;
+		font-size: 0.85rem;
+	}
+
+	.arrow {
+		color: #65c9b5;
+		font-size: 1.2rem;
+	}
+
+	@media (max-width: 700px) {
+		.page-heading {
+			padding: 2.5rem 0 1.5rem;
+		}
+
+		.page-heading h1 {
+			font-size: 1.7rem;
+		}
+
+		.link-item {
+			gap: 1rem;
+			padding: 1.2rem 0;
+		}
+
+		.link-icon {
+			width: 45px;
+			height: 45px;
+		}
+
+		.link-info p {
+			font-size: 0.75rem;
+		}
+	}
+</style>

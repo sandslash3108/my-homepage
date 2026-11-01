@@ -1,50 +1,163 @@
+
 ---
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="About | 〇〇のホームページ">
-	<img src="/images/profile.jpg" alt="プロフィール写真" class="profile-img" />
-	<h1>自己紹介</h1>
-	<p>〇〇〇〇大学の〇年生です。最近は〇〇にハマっています。</p>
+<Layout title="ABOUT | さどぱのデカいつぶやき">
+	<section class="page-heading">
+		<p class="section-label">ABOUT</p>
+		<h1>このサイトについて</h1>
+		<p class="description">さどぱのデカいつぶやきへようこそ。</p>
+	</section>
+
+	<section class="about-section">
+		<h2>PROFILE</h2>
+		<div class="profile">
+			<div class="profile-icon">S</div>
+			<div class="profile-info">
+				<p class="profile-name">さどぱ</p>
+				<p>大学生。いろいろなものを作ったり、考えたりしています。</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="about-section">
+		<h2>このサイトについて</h2>
+		<p>
+			短編小説、ミステリー、企画記事など、
+			思いついたことや作ったものを発信する個人サイトです。
+		</p>
+		<p>
+			ジャンルにとらわれず、面白いと思ったことを
+			自分なりの形で発信していきます。
+		</p>
+	</section>
+
+	<section class="about-section">
+		<h2>CONTACT</h2>
+		<p>お問い合わせや感想などは、XのDMからお願いします。</p>
+		<a
+			href="https://x.com/"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="contact-link"
+		>
+			X → 
+		</a>
+	</section>
 </Layout>
 
 <style>
-	.profile-img {
-		width: 120px;
-		height: 120px;
-		border-radius: 50%;
-		object-fit: cover;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	.page-heading {
+		padding: 4rem 0 2.5rem;
+		border-bottom: 1px solid #303b38;
 	}
-    .social-links {
-    display: flex;
-    gap: 0.75rem;
-    margin-top: 1rem;
-}
 
-.social-links a {
-    padding: 0.4rem 1rem;
-    border: 1px solid #4a90d9;
-    border-radius: 999px;
-    color: #4a90d9;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
-}
+	.section-label {
+		margin: 0;
+		color: #65c9b5;
+		font-size: 0.8rem;
+		letter-spacing: 0.15em;
+	}
 
-.social-links a:hover {
-    background-color: #4a90d9;
-    color: #fff;
-}
+	.page-heading h1 {
+		margin: 0.4rem 0;
+		font-size: 2.2rem;
+		font-weight: 700;
+	}
+
+	.description {
+		margin: 0;
+		color: #a5afab;
+		font-size: 0.9rem;
+	}
+
+	.about-section {
+		padding: 2.5rem 0;
+		border-bottom: 1px solid #303b38;
+	}
+
+	.about-section h2 {
+		margin: 0 0 1.5rem;
+		color: #65c9b5;
+		font-size: 0.85rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+	}
+
+	.about-section > p {
+		max-width: 650px;
+		color: #d0d6d3;
+		font-size: 0.95rem;
+		line-height: 2;
+	}
+
+	.profile {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.profile-icon {
+		width: 90px;
+		height: 90px;
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #1b2421;
+		border: 1px solid #303b38;
+		color: #65c9b5;
+		font-size: 2rem;
+		font-weight: 700;
+	}
+
+	.profile-info p {
+		margin: 0.3rem 0;
+		color: #d0d6d3;
+		font-size: 0.9rem;
+		line-height: 1.8;
+	}
+
+	.profile-info .profile-name {
+		color: #f4f4f4;
+		font-size: 1.2rem;
+		font-weight: 700;
+	}
+
+	.contact-link {
+		display: inline-block;
+		margin-top: 0.5rem;
+		color: #65c9b5;
+		text-decoration: none;
+	}
+
+	.contact-link:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 700px) {
+		.page-heading {
+			padding: 2.5rem 0 1.5rem;
+		}
+
+		.page-heading h1 {
+			font-size: 1.7rem;
+		}
+
+		.about-section {
+			padding: 2rem 0;
+		}
+
+		.profile {
+			align-items: flex-start;
+			gap: 1rem;
+		}
+
+		.profile-icon {
+			width: 65px;
+			height: 65px;
+			font-size: 1.5rem;
+		}
+	}
 </style>
-
-<div class="social-links">
-	<a href="https://twitter.com/hikakin" target="_blank" rel="noopener noreferrer">
-		Twitter (X)
-	</a>
-	<a href="https://youtube.com/hikakintv" target="_blank" rel="noopener noreferrer">
-		Youtube
-	</a>
-</div>

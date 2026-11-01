@@ -1,0 +1,165 @@
+
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="記事タイトル | さどぱのデカいつぶやき">
+	<div class="article-page">
+		<article class="article">
+		<header class="article-header">
+			<a href="/contents" class="back-link">← コンテンツ一覧に戻る</a>
+
+			<div class="thumbnail">
+				<span>01</span>
+			</div>
+
+			<p class="genre">短編</p>
+			<time datetime="2026-11-01">2026.11.01</time>
+			<h1>ここに記事のタイトルが入ります</h1>
+			<p class="article-description">
+				ここに記事の簡単な紹介文を入れます。
+			</p>
+		</header>
+
+		<div class="article-body">
+			<p>
+				ここから記事本文が始まります。
+				文章を段落ごとに分けて書いていきます。
+			</p>
+
+			<h2>見出しが入ります</h2>
+			<p>
+				記事の本文です。文章が長くなっても読みやすいように、
+				行間や文字の幅を調整しています。
+			</p>
+
+			<p>
+				段落を追加したいときは、このように
+				新しいpタグを追加すればOKです。
+			</p>
+
+			<h2>次の見出し</h2>
+			<p>
+				ここに続きの文章が入ります。
+			</p>
+		</div>
+
+		<footer class="article-footer">
+			<a href="/contents" class="back-link">← コンテンツ一覧に戻る</a>
+		</footer>
+			</article>
+	</div>
+</Layout>
+
+<style>
+	.article {
+		max-width: 850px;
+		margin: 0 auto;
+		padding: 2.5rem 0 5rem;
+	}
+
+	.back-link {
+	display: inline-block;
+	margin-bottom: 1.5rem;
+	color: #168875;
+	font-size: 0.85rem;
+	text-decoration: none;
+}
+
+	.back-link:hover {
+		text-decoration: underline;
+	}
+
+	.thumbnail {
+		aspect-ratio: 16 / 9;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #f0f3f2;
+		border: 1px solid #dce3e0;
+		color: #65c9b5;
+		font-size: 3rem;
+		font-weight: 700;
+	}
+
+	.genre {
+		display: inline-block;
+		margin: 1.5rem 1rem 0 0;
+		color: #168875;
+		font-size: 0.8rem;
+	}
+
+	.article-header time {
+		color: #687570;
+		font-size: 0.8rem;
+	}
+
+	.article-header h1 {
+		margin: 0.8rem 0;
+        color: #101413
+		font-size: 2rem;
+		font-weight: 700;
+		line-height: 1.5;
+	}
+
+	.article-description {
+		color: #687570;
+		font-size: 0.95rem;
+		line-height: 1.8;
+	}
+
+	.article-body {
+		margin-top: 3rem;
+		color: #303b38;
+		font-size: 1rem;
+		line-height: 2.2;
+	}
+
+	.article-body h2 {
+		margin: 3rem 0 1rem;
+		padding-bottom: 0.7rem;
+		border-bottom: 1px solid #dce3e0;
+		color: #101413;
+		font-size: 1.4rem;
+		font-weight: 700;
+		line-height: 1.5;
+	}
+
+	.article-body p {
+		margin: 1.5rem 0;
+	}
+
+	.article-footer {
+		margin-top: 4rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid #dce3e0;
+	}
+
+	.article-footer .back-link {
+		margin: 0;
+	}
+
+	@media (max-width: 700px) {
+		.article {
+			padding: 1.5rem 0 3rem;
+		}
+
+		.article-header h1 {
+			font-size: 1.5rem;
+		}
+
+		.article-body {
+			font-size: 0.9rem;
+		}
+
+		.article-body h2 {
+			font-size: 1.2rem;
+		}
+	}
+    .article-page {
+	background: #ffffff;
+	color: #101413;
+	width: 100vw;
+	margin-left: calc(50% - 50vw);
+}
+</style>
