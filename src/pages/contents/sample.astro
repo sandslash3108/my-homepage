@@ -1,9 +1,28 @@
 
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const article = {
+	title: 'ここに記事のタイトルが入ります',
+	genre: '短編',
+	date: '2026.11.01',
+	datetime: '2026-11-01',
+	number: '01',
+    thumbnail: '/images/sample-thumbnail.jpg',
+	description: 'ここに記事の簡単な紹介文を入れます。',
+    body: [
+	{ type: 'paragraph', text: 'ここから記事本文が始まります。' },
+	{ type: 'heading', text: '見出しが入ります' },
+	{ type: 'paragraph', text: '記事の本文です。' },
+	{ type: 'bold', text: 'ここは太字で表示されます。' },
+	{ type: 'accent', text: 'ここは翡翠色で表示されます。' },
+	{ type: 'quote', text: 'ここに印象的なセリフや引用を入れます。' },
+	{ type: 'image', src: '/images/sample-image.jpg', alt: '画像の説明', caption: '画像の補足説明' },
+],
+};
 ---
 
-<Layout title="記事タイトル | さどぱのデカいつぶやき">
+<Layout title={`${article.title} | さどぱのデカいつぶやき`}>
 	<div class="article-page">
 		<article class="article">
         
@@ -12,63 +31,56 @@ import Layout from '../../layouts/Layout.astro';
 				<span>›</span>
 				<a href="/contents">CONTENTS</a>
 				<span>›</span>
-				<span class="current">記事タイトル</span>
+				<span class="current">{article.title}</span>
 			</nav>
 
 		<header class="article-header">
 			<a href="/contents" class="back-link">← コンテンツ一覧に戻る</a>
 
 			<div class="thumbnail">
-				<span>01</span>
+				<img src={article.thumbnail} alt={article.title} />
 			</div>
 
-			<p class="genre">短編</p>
-			<time datetime="2026-11-01">2026.11.01</time>
-			<h1>ここに記事のタイトルが入ります</h1>
+			<p class="genre">{article.genre}</p>
+			<time datetime={article.datetime}>{article.date}</time>
+			<h1>{article.title}</h1>
 			<p class="article-description">
-				ここに記事の簡単な紹介文を入れます。
+				{article.description}
 			</p>
 		</header>
 
 		<div class="article-body">
-			<p>
-				ここから記事本文が始まります。
-				文章を段落ごとに分けて書いていきます。
-			</p>
+	{article.body.map((item) => {
+		if (item.type === 'heading') {
+			return <h2>{item.text}</h2>;
+		}
 
-			<h2>見出しが入ります</h2>
-			<p>
-				記事の本文です。文章が長くなっても読みやすいように、
-				行間や文字の幅を調整しています。
-			</p>
+		if (item.type === 'paragraph') {
+			return <p>{item.text}</p>;
+		}
 
-			<p>
-				段落を追加したいときは、このように
-				新しいpタグを追加すればOKです。
-			</p>
+		if (item.type === 'bold') {
+			return <p><strong>{item.text}</strong></p>;
+		}
 
-			<h2>次の見出し</h2>
-			<p>
-				ここに続きの文章が入ります。
-			</p>
+		if (item.type === 'accent') {
+			return <p><span class="accent-text">{item.text}</span></p>;
+		}
 
-            <p>
-	            普通の文章の中に、
-	            <strong>太字にしたい部分</strong>を入れられるよ。
-            </p>
+		if (item.type === 'quote') {
+			return <blockquote>{item.text}</blockquote>;
+		}
 
-            <p>
-	            <span class="accent-text">ここは翡翠色で表示される文章。</span>
-            </p>
-
-<blockquote>
-	ここに印象的なセリフや、引用したい文章を入れる。
-</blockquote>
-        <figure class="article-image">
-	<img src="/images/sample-image.jpg" alt="画像の説明" />
-	<figcaption>画像の説明や補足をここに書く。</figcaption>
-</figure>
-		</div>
+		if (item.type === 'image') {
+			return (
+				<figure class="article-image">
+					<img src={item.src} alt={item.alt} />
+					<figcaption>{item.caption}</figcaption>
+				</figure>
+			);
+		}
+	})}
+</div>
 
 		<footer class="article-footer">
 			<a href="/contents" class="back-link">← コンテンツ一覧に戻る</a>
@@ -78,7 +90,7 @@ import Layout from '../../layouts/Layout.astro';
 			<p class="share-title">この記事をシェアする</p>
 			<div class="share-links">
 				<a
-					href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent('記事タイトル')}`}
+					href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent(article.title)}`}
 					target="_blank"
 					rel="noopener noreferrer"
 					class="share-button"
@@ -120,7 +132,7 @@ import Layout from '../../layouts/Layout.astro';
 
 			<a href="/contents/sample" class="related-card">
 				<div class="related-thumbnail">04</div>
-				<p>短編</p>
+				<p>{article.genre}</p>
 				<h3>ここに関連記事のタイトル</h3>
 			</a>
 		</div>
@@ -175,7 +187,7 @@ import Layout from '../../layouts/Layout.astro';
 
 	.article-header h1 {
 		margin: 0.8rem 0;
-        color: #101413
+        color: #101413;
 		font-size: 2rem;
 		font-weight: 700;
 		line-height: 1.5;

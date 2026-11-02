@@ -1,0 +1,60 @@
+
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 | さどぱのデカいつぶやき">
+	<main class="error-page">
+		<p class="section-label">404 — PAGE NOT FOUND</p>
+		<h1>ページが見つかりませんでした。</h1>
+		<p class="description">
+			お探しのページは、移動または削除された可能性があります。
+		</p>
+		<a href="/" class="home-link">HOMEに戻る →</a>
+	</main>
+</Layout>
+
+<style>
+	.error-page {
+		min-height: 65vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: 4rem 1.5rem;
+	}
+
+	.section-label {
+		color: #65c9b5;
+		font-size: 0.8rem;
+		letter-spacing: 0.15em;
+		margin-bottom: 1.5rem;
+	}
+
+	h1 {
+		color: #f4f4f4;
+		font-size: clamp(1.5rem, 4vw, 2.5rem);
+		margin: 0 0 1rem;
+	}
+
+	.description {
+		color: #a5afab;
+		font-size: 0.95rem;
+		line-height: 1.8;
+		margin-bottom: 2.5rem;
+	}
+
+	.home-link {
+		color: #65c9b5;
+		text-decoration: none;
+		border: 1px solid #65c9b5;
+		padding: 0.8rem 1.8rem;
+		transition: background 0.2s, color 0.2s;
+	}
+
+	.home-link:hover {
+		background: #65c9b5;
+		color: #101413;
+	}
+</style>
