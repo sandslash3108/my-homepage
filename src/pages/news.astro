@@ -25,6 +25,8 @@ const newsList = [
 			</a>
 		))}
 	</section>
+    <nav class="pagination" id="pagination" aria-label="ページ送り">
+</nav>
 </Layout>
 
 <style>
@@ -119,3 +121,69 @@ const newsList = [
 		}
 	}
 </style>
+<script>
+	const newsItems = Array.from(document.querySelectorAll('.news-item'));
+	const pagination = document.querySelector('#pagination');
+
+	const perPage = 12;
+	let currentPage = 1;
+
+	function showNews() {
+		const totalPages = Math.ceil(newsItems.length / perPage);
+
+		const start = (currentPage - 1) * perPage;
+		const end = start + perPage;
+
+		newsItems.forEach((item) => {
+			(item as HTMLElement).style.display = 'none';
+		});
+
+		newsItems.slice(start, end).forEach((item) => {
+			(item as HTMLElement).style.display = '';
+		});
+
+		showPagination(totalPages);
+	}
+
+	function showPagination(totalPages: number) {
+		if (!pagination) return;
+
+		pagination.innerHTML = '';
+
+		if (totalPages <= 1) return;
+
+		for (let page = 1; page <= totalPages; page++) {
+			const link = document.createElement('a');
+			link.href = '#';
+			link.textContent = String(page);
+
+			if (page === currentPage) {
+				link.classList.add('current');
+			}
+
+			link.addEventListener('click', (event) => {
+				event.preventDefault();
+				currentPage = page;
+				showNews();
+			});
+
+			pagination.appendChild(link);
+		}
+
+		if (currentPage < totalPages) {
+			const next = document.createElement('a');
+			next.href = '#';
+			next.textContent = '次へ →';
+
+			next.addEventListener('click', (event) => {
+				event.preventDefault();
+				currentPage++;
+				showNews();
+			});
+
+			pagination.appendChild(next);
+		}
+	}
+
+	showNews();
+</script>

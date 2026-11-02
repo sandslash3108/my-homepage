@@ -30,12 +30,7 @@ const posts = [
 			</a>
 		))}
 	</section>
-    <nav class="pagination" aria-label="ページ送り">
-	<a href="#" class="current">1</a>
-	<a href="#">2</a>
-	<a href="#">3</a>
-	<span>...</span>
-	<a href="#">次へ →</a>
+    <nav class="pagination" id="pagination" aria-label="ページ送り">
 </nav>
 </Layout>
 
@@ -154,3 +149,69 @@ const posts = [
 	border: none;
 }
 </style>
+<script>
+	const postCards = Array.from(document.querySelectorAll('.post-card'));
+	const pagination = document.querySelector('#pagination');
+
+	const perPage = 12;
+	let currentPage = 1;
+
+	function showPosts() {
+		const totalPages = Math.ceil(postCards.length / perPage);
+
+		const start = (currentPage - 1) * perPage;
+		const end = start + perPage;
+
+		postCards.forEach((card) => {
+			(card as HTMLElement).style.display = 'none';
+		});
+
+		postCards.slice(start, end).forEach((card) => {
+			(card as HTMLElement).style.display = '';
+		});
+
+		showPagination(totalPages);
+	}
+
+	function showPagination(totalPages: number) {
+		if (!pagination) return;
+
+		pagination.innerHTML = '';
+
+		if (totalPages <= 1) return;
+
+		for (let page = 1; page <= totalPages; page++) {
+			const link = document.createElement('a');
+			link.href = '#';
+			link.textContent = String(page);
+
+			if (page === currentPage) {
+				link.classList.add('current');
+			}
+
+			link.addEventListener('click', (event) => {
+				event.preventDefault();
+				currentPage = page;
+				showPosts();
+			});
+
+			pagination.appendChild(link);
+		}
+
+		if (currentPage < totalPages) {
+			const next = document.createElement('a');
+			next.href = '#';
+			next.textContent = '次へ →';
+
+			next.addEventListener('click', (event) => {
+				event.preventDefault();
+				currentPage++;
+				showPosts();
+			});
+
+			pagination.appendChild(next);
+		}
+	}
+
+	showPosts();
+</script>

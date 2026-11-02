@@ -39,12 +39,7 @@ const articles = [
 		</a>
 	))}
 </section>
-    <nav class="pagination" aria-label="ページ送り">
-	<a href="#" class="current">1</a>
-	<a href="#">2</a>
-	<a href="#">3</a>
-	<span>...</span>
-	<a href="#">次へ →</a>
+    <nav class="pagination" id="pagination" aria-label="ページ送り">
 </nav>
 </Layout>
 
@@ -200,48 +195,110 @@ const articles = [
 </style>
 <script>
 	const categoryLinks = document.querySelectorAll('.category-nav a');
-	const articleCards = document.querySelectorAll('.article-card');
+	const articleCards = Array.from(document.querySelectorAll('.article-card'));
+	const pagination = document.querySelector('#pagination');
 
-	function filterArticles(genre: string) {
+	const perPage = 12;
+	let selectedGenre = new URLSearchParams(window.location.search).get('genre') ?? 'ALL';
+	let currentPage = 1;
+
+	function getFilteredCards() {
+		return articleCards.filter((card) => {
+			const genre = card.getAttribute('data-genre');
+			return selectedGenre === 'ALL' || genre === selectedGenre;
+		});
+	}
+
+	function showArticles() {
+		const filteredCards = getFilteredCards();
+		const totalPages = Math.ceil(filteredCards.length / perPage);
+
+		if (totalPages > 0 && currentPage > totalPages) {
+			currentPage = totalPages;
+		}
+
+		const start = (currentPage - 1) * perPage;
+		const end = start + perPage;
+
 		articleCards.forEach((card) => {
-			const cardGenre = card.getAttribute('data-genre');
+			(card as HTMLElement).style.display = 'none';
+		});
 
-			if (genre === 'ALL' || cardGenre === genre) {
-				(card as HTMLElement).style.display = '';
-			} else {
-				(card as HTMLElement).style.display = 'none';
-			}
+		filteredCards.slice(start, end).forEach((card) => {
+			(card as HTMLElement).style.display = '';
 		});
 
 		categoryLinks.forEach((link) => {
 			link.classList.toggle(
 				'active',
-				link.getAttribute('data-genre') === genre
+				link.getAttribute('data-genre') === selectedGenre
 			);
 		});
+
+		showPagination(totalPages);
+	}
+
+	function showPagination(totalPages: number) {
+		if (!pagination) return;
+
+		pagination.innerHTML = '';
+
+		if (totalPages <= 1) return;
+
+		for (let page = 1; page <= totalPages; page++) {
+			const link = document.createElement('a');
+			link.href = '#';
+			link.textContent = String(page);
+
+			if (page === currentPage) {
+				link.classList.add('current');
+			}
+
+			link.addEventListener('click', (event) => {
+				event.preventDefault();
+				currentPage = page;
+				showArticles();
+			});
+
+			pagination.appendChild(link);
+		}
+
+		if (currentPage < totalPages) {
+			const next = document.createElement('a');
+			next.href = '#';
+			next.textContent = '次へ →';
+
+			next.addEventListener('click', (event) => {
+				event.preventDefault();
+				currentPage++;
+				showArticles();
+			});
+
+			pagination.appendChild(next);
+		}
 	}
 
 	categoryLinks.forEach((link) => {
 		link.addEventListener('click', (event) => {
 			event.preventDefault();
 
-			const genre = link.getAttribute('data-genre') ?? 'ALL';
+			selectedGenre = link.getAttribute('data-genre') ?? 'ALL';
+			currentPage = 1;
 
-			filterArticles(genre);
-
-			const url = genre === 'ALL'
+			const url = selectedGenre === 'ALL'
 				? '/contents'
-				: `/contents?genre=${encodeURIComponent(genre)}`;
+				: `/contents?genre=${encodeURIComponent(selectedGenre)}`;
 
 			history.pushState({}, '', url);
+			showArticles();
 		});
 	});
 
-	const initialGenre = new URLSearchParams(window.location.search).get('genre') ?? 'ALL';
-	filterArticles(initialGenre);
-
 	window.addEventListener('popstate', () => {
-		const genre = new URLSearchParams(window.location.search).get('genre') ?? 'ALL';
-		filterArticles(genre);
+		selectedGenre = new URLSearchParams(window.location.search).get('genre') ?? 'ALL';
+		currentPage = 1;
+		showArticles();
 	});
+
+	showArticles();
 </script>
