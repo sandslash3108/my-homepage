@@ -3,12 +3,17 @@
 import Layout from '../layouts/Layout.astro';
 
 const articles = [
-	{ genre: '短編', title: 'ここに短編のタイトル', number: '01' },
-	{ genre: 'ミステリー', title: 'ここにミステリーのタイトル', number: '02' },
-	{ genre: '記事', title: 'ここに記事のタイトル', number: '03' },
-	{ genre: '短編', title: 'ここに短編のタイトル', number: '04' },
-	{ genre: 'ミステリー', title: 'ここにミステリーのタイトル', number: '05' },
-	{ genre: '記事', title: 'ここに記事のタイトル', number: '06' },
+	{ genre: '短編', title: 'ここに短編のタイトル', number: '01', path: 'sample', thumbnail: '/images/sample-thumbnail.jpg' },
+	{ genre: 'ミステリー', title: 'ここにミステリーのタイトル', number: '02', path: 'sample2', thumbnail: '/images/sample-thumbnail02.jpg' },
+	{ genre: '記事', title: 'ここに記事のタイトル', number: '03', path: 'sample', thumbnail: '/images/sample-thumbnail.jpg' },
+	{ genre: '短編', title: 'ここに短編のタイトル', number: '04', path: 'sample', thumbnail: '/images/sample-thumbnail02.jpg' },
+	{ genre: 'ミステリー', title: 'ここにミステリーのタイトル', number: '05', path: 'sample', thumbnail: '/images/sample-thumbnail.jpg' },
+	{ genre: '記事', title: 'ここに記事のタイトル', number: '06', path: 'sample', thumbnail: '/images/sample-thumbnail02.jpg' },
+];
+const newsList = [
+	{ title: 'サイトを公開しました。', date: '2026.11.01', datetime: '2026-11-01', path: 'sample' },
+	{ title: '新しいコンテンツを追加しました。', date: '2026.10.25', datetime: '2026-10-25', path: 'sample' },
+	{ title: 'サイト制作を開始しました。', date: '2026.10.20', datetime: '2026-10-20', path: 'sample' },
 ];
 ---
 
@@ -30,16 +35,16 @@ const articles = [
 		</div>
 
 		<div class="article-list">
-			{articles.map((article) => (
-				<a href="/contents/sample" class="article-card">
-					<div class="thumbnail">
-						<span>{article.number}</span>
-					</div>
-					<p class="genre">{article.genre}</p>
-					<h3>{article.title}</h3>
-				</a>
-			))}
-		</div>
+	{articles.map((article) => (
+		<a href={`/contents/${article.path}`} class="article-card">
+			<div class="thumbnail">
+				<img src={article.thumbnail} alt={article.title} />
+			</div>
+			<p class="genre">{article.genre}</p>
+			<h3>{article.title}</h3>
+		</a>
+	))}
+</div>
 	</section>
 	
 	<section class="news">
@@ -52,19 +57,13 @@ const articles = [
 		</div>
 
 		<div class="news-list">
-			<a href="/news/sample" class="news-item">
-				<time datetime="2026-11-01">2026.11.01</time>
-				<span>サイトを公開しました。</span>
-			</a>
-			<a href="/news/sample" class="news-item">
-				<time datetime="2026-10-25">2026.10.25</time>
-				<span>新しいコンテンツを追加しました。</span>
-			</a>
-			<a href="/news/sample" class="news-item">
-				<time datetime="2026-10-20">2026.10.20</time>
-				<span>サイト制作を開始しました。</span>
-			</a>
-		</div>
+	{newsList.map((news) => (
+		<a href={`/news/${news.path}`} class="news-item">
+			<time datetime={news.datetime}>{news.date}</time>
+			<span>{news.title}</span>
+		</a>
+	))}
+</div>
 	</section>
 </Layout>
 
@@ -132,21 +131,23 @@ const articles = [
 	}
 
 	.thumbnail {
-		aspect-ratio: 16 / 10;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: #1b2421;
-		border: 1px solid #303b38;
-		color: #65c9b5;
-		font-family: "Zen Kaku Gothic New", sans-serif;
-		font-size: 2rem;
-		transition: background-color 0.2s;
-	}
+	aspect-ratio: 16 / 10;
+	overflow: hidden;
+	background: #1b2421;
+	border: 1px solid #303b38;
+}
 
-	.article-card:hover .thumbnail {
-		background: #263630;
-	}
+.thumbnail img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.2s;
+}
+
+.article-card:hover .thumbnail img {
+	transform: scale(1.03);
+}
 
 	.genre {
 		margin: 0.8rem 0 0.2rem;

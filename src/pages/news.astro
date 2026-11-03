@@ -3,9 +3,9 @@
 import Layout from '../layouts/Layout.astro';
 
 const newsList = [
-	{ title: 'サイトを公開しました。', date: '2026.11.01', datetime: '2026-11-01' },
-	{ title: '新しいコンテンツを追加しました。', date: '2026.10.25', datetime: '2026-10-25' },
-	{ title: 'サイト制作を開始しました。', date: '2026.10.20', datetime: '2026-10-20' },
+	{ title: 'サイトを公開しました。', date: '2026.11.01', datetime: '2026-11-01', path: 'sample' },
+	{ title: '新しいコンテンツを追加しました。', date: '2026.10.25', datetime: '2026-10-25', path: 'sample' },
+	{ title: 'サイト制作を開始しました。', date: '2026.10.20', datetime: '2026-10-20', path: 'sample' },
 ];
 ---
 
@@ -18,7 +18,7 @@ const newsList = [
 
 	<section class="news-list">
 		{newsList.map((news) => (
-			<a href="/news/sample" class="news-item">
+			<a href={`/news/${news.path}`} class="news-item">
 				<time datetime={news.datetime}>{news.date}</time>
 				<h2>{news.title}</h2>
 				<span class="arrow">→</span>

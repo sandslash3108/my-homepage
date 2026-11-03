@@ -1,9 +1,31 @@
 
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const article = {
+	title: 'サイトを公開しました',
+	genre: 'お知らせ',
+	date: '2026.11.02',
+	datetime: '2026-11-02',
+	number: '01',
+	thumbnail: '/images/sample-thumbnail.jpg',
+	description: 'さどぱのデカいつぶやきを公開しました。これからよろしくお願いします。',
+	body: [
+		{ type: 'paragraph', text: 'ここから記事本文が始まります。文章を段落ごとに分けて書いていきます。' },
+		{ type: 'heading', text: '見出しが入ります' },
+		{ type: 'paragraph', text: '記事の本文です。文章が長くなっても読みやすいように、行間や文字の幅を調整しています。' },
+		{ type: 'paragraph', text: '段落を追加したいときは、このように新しい項目を追加すればOKです。' },
+		{ type: 'heading', text: '次の見出し' },
+		{ type: 'paragraph', text: 'ここに続きの文章が入ります。' },
+		{ type: 'bold', text: 'ここは太字で表示されます。' },
+		{ type: 'accent', text: 'ここは翡翠色で表示されます。' },
+		{ type: 'quote', text: 'ここに印象的なセリフや、引用したい文章を入れます。' },
+		{ type: 'image', src: '/images/sample-image.jpg', alt: '画像の説明', caption: '画像の説明や補足をここに書く。' },
+	],
+};
 ---
 
-<Layout title="サイトを公開しました | さどぱのデカいつぶやき">
+<Layout title={`${article.title} | さどぱのデカいつぶやき`}>
 	<div class="article-page">
 	<article class="article">
 		<nav class="breadcrumb" aria-label="パンくずリスト">
@@ -11,63 +33,37 @@ import Layout from '../../layouts/Layout.astro';
 	       <span>›</span>
 	         <a href="/news">NEWS</a>
 	       <span>›</span>
-	       <span class="current">お知らせタイトル</span>
+	       <span class="current">{article.title}</span>
         </nav>
 
 		<header class="article-header">
 			<a href="/news" class="back-link">← お知らせ一覧に戻る</a>
 
 			<div class="thumbnail">
-				<span>01</span>
-			</div>
+	<img src={article.thumbnail} alt={article.title} />
+</div>
 
-			<p class="genre">お知らせ</p>
-			<time datetime="2026-11-02">2026.11.02</time>
-			<h1>サイトを公開しました</h1>
-            <p class="article-description">
-	        さどぱのデカいつぶやきを公開しました。これからよろしくお願いします。
-            </p>
+			<p class="genre">{article.genre}</p>
+			<time datetime={article.datetime}>{article.date}</time>
+			<h1>{article.title}</h1>
+            <p class="article-description">{article.description}</p>
 		</header>
 
 		<div class="article-body">
-			<p>
-				ここから記事本文が始まります。
-				文章を段落ごとに分けて書いていきます。
-			</p>
-
-			<h2>見出しが入ります</h2>
-			<p>
-				記事の本文です。文章が長くなっても読みやすいように、
-				行間や文字の幅を調整しています。
-			</p>
-
-			<p>
-				段落を追加したいときは、このように
-				新しいpタグを追加すればOKです。
-			</p>
-
-			<h2>次の見出し</h2>
-			<p>
-				ここに続きの文章が入ります。
-			</p>
-
-            <p>
-	            普通の文章の中に、
-	            <strong>太字にしたい部分</strong>を入れられるよ。
-            </p>
-
-            <p>
-	            <span class="accent-text">ここは翡翠色で表示される文章。</span>
-            </p>
-
-<blockquote>
-	ここに印象的なセリフや、引用したい文章を入れる。
-</blockquote>
-        <figure class="article-image">
-	<img src="/images/sample-image.jpg" alt="画像の説明" />
-	<figcaption>画像の説明や補足をここに書く。</figcaption>
-</figure>
-		</div>
+	{article.body.map((item) => {
+		if (item.type === 'heading') return <h2>{item.text}</h2>;
+		if (item.type === 'paragraph') return <p>{item.text}</p>;
+		if (item.type === 'bold') return <p><strong>{item.text}</strong></p>;
+		if (item.type === 'accent') return <p><span class="accent-text">{item.text}</span></p>;
+		if (item.type === 'quote') return <blockquote>{item.text}</blockquote>;
+		if (item.type === 'image') return (
+			<figure class="article-image">
+				<img src={item.src} alt={item.alt} />
+				<figcaption>{item.caption}</figcaption>
+			</figure>
+		);
+	})}
+</div>
 
 		<footer class="article-footer">
 			<a href="/news" class="back-link">← お知らせ一覧に戻る</a>
@@ -143,16 +139,18 @@ import Layout from '../../layouts/Layout.astro';
 	}
 
 	.thumbnail {
-		aspect-ratio: 16 / 9;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: #f0f3f2;
-		border: 1px solid #dce3e0;
-		color: #65c9b5;
-		font-size: 3rem;
-		font-weight: 700;
-	}
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: #f0f3f2;
+	border: 1px solid #dce3e0;
+}
+
+.thumbnail img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
 
 	.genre {
 		display: inline-block;

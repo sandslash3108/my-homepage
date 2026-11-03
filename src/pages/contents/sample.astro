@@ -119,19 +119,25 @@ const article = {
 
 		<div class="related-list">
 			<a href="/contents/sample" class="related-card">
-				<div class="related-thumbnail">02</div>
+				<div class="related-thumbnail">
+	<img src="/images/sample-thumbnail02.jpg" alt="関連記事のサムネイル" />
+</div>
 				<p>ミステリー</p>
 				<h3>ここに関連記事のタイトル</h3>
 			</a>
 
 			<a href="/contents/sample" class="related-card">
-				<div class="related-thumbnail">03</div>
+				<div class="related-thumbnail">
+	<img src="/images/sample-thumbnail03.jpg" alt="関連記事のサムネイル" />
+</div>
 				<p>記事</p>
 				<h3>ここに関連記事のタイトル</h3>
 			</a>
 
 			<a href="/contents/sample" class="related-card">
-				<div class="related-thumbnail">04</div>
+				<div class="related-thumbnail">
+	<img src="/images/sample-thumbnail04.jpg" alt="関連記事のサムネイル" />
+</div>
 				<p>{article.genre}</p>
 				<h3>ここに関連記事のタイトル</h3>
 			</a>
@@ -162,16 +168,18 @@ const article = {
 	}
 
 	.thumbnail {
-		aspect-ratio: 16 / 9;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: #f0f3f2;
-		border: 1px solid #dce3e0;
-		color: #65c9b5;
-		font-size: 3rem;
-		font-weight: 700;
-	}
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: #f0f3f2;
+	border: 1px solid #dce3e0;
+}
+
+.thumbnail img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
 
 	.genre {
 		display: inline-block;
@@ -325,15 +333,21 @@ const article = {
 
 .related-thumbnail {
 	aspect-ratio: 16 / 10;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	overflow: hidden;
 	background: #1b2421;
 	border: 1px solid #303b38;
-	color: #65c9b5;
-	font-size: 2rem;
-	font-weight: 700;
-	transition: background-color 0.2s;
+	transition: transform 0.2s;
+}
+
+.related-thumbnail img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.related-card:hover .related-thumbnail {
+	transform: scale(1.02);
 }
 
 .related-card:hover .related-thumbnail {

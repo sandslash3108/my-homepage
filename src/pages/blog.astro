@@ -3,12 +3,12 @@
 import Layout from '../layouts/Layout.astro';
 
 const posts = [
-	{ title: 'ここにブログのタイトル', number: '01', date: '2026.11.01', thumbnail: '/images/sample-thumbnail.jpg' },
-	{ title: 'ここにブログのタイトル', number: '02', date: '2026.10.25', thumbnail: '/images/sample-thumbnail02.jpg' },
-	{ title: 'ここにブログのタイトル', number: '03', date: '2026.10.20', thumbnail: '/images/sample-thumbnail.jpg' },
-	{ title: 'ここにブログのタイトル', number: '04', date: '2026.10.15', thumbnail: '/images/sample-thumbnail02.jpg' },
-	{ title: 'ここにブログのタイトル', number: '05', date: '2026.10.10', thumbnail: '/images/sample-thumbnail.jpg' },
-	{ title: 'ここにブログのタイトル', number: '06', date: '2026.10.05', thumbnail: '/images/sample-thumbnail02.jpg' },
+	{ title: 'ここにブログのタイトル', number: '01', date: '2026.11.01', thumbnail: '/images/sample-thumbnail.jpg', path: 'sample' },
+	{ title: 'ここにブログのタイトル', number: '02', date: '2026.10.25', thumbnail: '/images/sample-thumbnail02.jpg', path: 'sample' },
+	{ title: 'ここにブログのタイトル', number: '03', date: '2026.10.20', thumbnail: '/images/sample-thumbnail.jpg', path: 'sample' },
+	{ title: 'ここにブログのタイトル', number: '04', date: '2026.10.15', thumbnail: '/images/sample-thumbnail02.jpg', path: 'sample' },
+	{ title: 'ここにブログのタイトル', number: '05', date: '2026.10.10', thumbnail: '/images/sample-thumbnail.jpg', path: 'sample' },
+	{ title: 'ここにブログのタイトル', number: '06', date: '2026.10.05', thumbnail: '/images/sample-thumbnail02.jpg', path: 'sample' },
 ];
 ---
 
@@ -21,7 +21,7 @@ const posts = [
 
 	<section class="post-grid">
 		{posts.map((post) => (
-			<a href="/blog/sample" class="post-card">
+			<a href={`/blog/${post.path}`} class="post-card">
 				<div class="thumbnail">
 	<img src={post.thumbnail} alt={post.title} />
 </div>
