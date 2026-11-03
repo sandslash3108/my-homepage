@@ -95,25 +95,29 @@ const article = {
 	</div>
 
 	<section class="related">
-		<div class="related-heading">
-			<p>RELATED NEWS</p>
-			<h2>関連するお知らせ</h2>
-		</div>
+	<div class="related-heading">
+		<p>RELATED NEWS</p>
+		<h2>関連するお知らせ</h2>
+	</div>
 
-		<div class="related-list">
-	<a href="/news/sample" class="related-card">
-		<div class="related-thumbnail">02</div>
-		<p>NEWS</p>
-		<h3>次のお知らせのタイトル</h3>
-	</a>
+	<div class="related-list">
+		<a href="/news/sample" class="related-card">
+			<div class="related-thumbnail">
+				<img src="/images/sample-thumbnail02.jpg" alt="関連記事のサムネイル" />
+			</div>
+			<p>NEWS</p>
+			<h3>次のお知らせのタイトル</h3>
+		</a>
 
-	<a href="/news/sample" class="related-card">
-		<div class="related-thumbnail">03</div>
-		<p>NEWS</p>
-		<h3>別のお知らせのタイトル</h3>
-	</a>
-</div>
-	</section>
+		<a href="/news/sample" class="related-card">
+			<div class="related-thumbnail">
+				<img src="/images/sample-thumbnail03.jpg" alt="関連記事のサムネイル" />
+			</div>
+			<p>NEWS</p>
+			<h3>別のお知らせのタイトル</h3>
+		</a>
+	</div>
+</section>
 </Layout>
 
 
@@ -304,19 +308,21 @@ const article = {
 
 .related-thumbnail {
 	aspect-ratio: 16 / 10;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	overflow: hidden;
 	background: #1b2421;
 	border: 1px solid #303b38;
-	color: #65c9b5;
-	font-size: 2rem;
-	font-weight: 700;
-	transition: background-color 0.2s;
+	transition: transform 0.2s;
+}
+
+.related-thumbnail img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .related-card:hover .related-thumbnail {
-	background: #263630;
+	transform: scale(1.02);
 }
 
 .related-card p {
